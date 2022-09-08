@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/site.css">
     <title>Sim - Panorama</title>
 </head>
-<body >
+<body>
     <div class="container-m20">
         <div class="row">
             <div class="box-container-card">
@@ -85,20 +85,40 @@
         </div>
     </div>
     <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="js/site.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script language="javascript">
+        DoUserList();
+        DoAtendimentos();
+        CreateCharts();
 
         setInterval(function () {
             DoUserList();
             DoAtendimentos();
             CreateCharts();
-        }, 15000);
+        }, 60000);
 
         function CreateCharts(){
             google.charts.load('current', {packages: ['corechart', 'bar']});
             google.charts.setOnLoadCallback(DoCharts);     
         }   
+
+        function DoUserList() {
+            $.getJSON(`https://localhost:7116/v1/bi-users_status`, (data) => {
+                $('#cardcontainer').empty();
+                $('#cardcontainer').append('<div class="card-header grey-text">Usuários<i class="material-icons left">account_circle</i></div>');
+                $.each(data, function (i, item) {                   
+                    $('#cardcontainer').append(`<div id="container${i}" class="font-size-12 pdn-10 mgn-l-10 grey-text">`);
+                    $(`#container${i}`).append(`<p class="truncate">${item.setor}</p>`);
+                    $.each(item.lista, function (x, xitem) {
+                        let _icon = xitem.status === "Em Atendimento" ? "do_not_disturb_on" : "check_circle";
+                        let _user_on = xitem.status === "Em Atendimento" ? "orange-text" : "green-text";
+                        $(`#container${i}`).append(`<p title="${xitem.status}">${xitem.atendente}<i class="tiny material-icons left ${_user_on} mgn-t-2">${_icon}</i></p>`);
+                    });
+                    $('#cardcontainer').append('</div>');
+                    $('#cardcontainer').append('<div class="divider"></div>');
+                });                             
+            });
+        };
 
         function DoAtendimentos() {
             $.getJSON(`https://localhost:7116/v1/bi-atendimentos`, (data) => {
@@ -236,24 +256,6 @@
                 chart.draw(data, options);
             });     
         }
-
-        function DoUserList() {
-            $.getJSON(`https://localhost:7116/v1/bi-users_status`, (data) => {
-                $('#cardcontainer').empty();
-                $('#cardcontainer').append('<div class="card-header grey-text">Usuários<i class="material-icons left">account_circle</i></div>');
-                $.each(data, function (i, item) {                   
-                    $('#cardcontainer').append(`<div id="container${i}" class="font-size-12 pdn-10 mgn-l-10 grey-text">`);
-                    $(`#container${i}`).append(`<p class="truncate">${item.setor}</p>`);
-                    $.each(item.lista, function (x, xitem) {
-                        let _icon = xitem.status === "Em Atendimento" ? "do_not_disturb_on" : "check_circle";
-                        let _user_on = xitem.status === "Em Atendimento" ? "orange-text" : "green-text";
-                        $(`#container${i}`).append(`<p title="${xitem.status}">${xitem.atendente}<i class="tiny material-icons left ${_user_on} mgn-t-2">${_icon}</i></p>`);
-                    });
-                    $('#cardcontainer').append('</div>');
-                    $('#cardcontainer').append('<div class="divider"></div>');
-                });                             
-            });
-        };
     </script>
 </body>
 </html>
