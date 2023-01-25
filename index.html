@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="lib/google/material-symbols-rounded.css"/>
+    <link rel="stylesheet" href="lib/google/material-symbols-rounded.css" />
     <link rel="stylesheet" href="lib/materialize/css/materialize.min.css" />
     <link rel="stylesheet" href="css/site.css">
     <title>Sim - Panorama</title>
 </head>
+
 <body>
     <div class="container-m20">
         <div class="row">
@@ -21,12 +23,13 @@
                 <div class="box-column-8">
                     <div class="box-column-row">
                         <div class="box-card z-depth-0 border-a">
-                            <div class="card-header grey-text">Panorama Geral<i class="material-icons left">view_module</i></div>
+                            <div class="card-header grey-text">Panorama Geral<i
+                                    class="material-icons left">view_module</i></div>
                             <div class="box-around">
-                                <a class="box-cell-item-flex font-size-12 white">                            
+                                <a class="box-cell-item-flex font-size-12 white">
                                     <p id="_atendimentos" class="light-blue-text font-h5"></p>
                                     <p class="grey-text">(atendimentos)</p>
-                                </a>       
+                                </a>
                                 <a class="box-cell-item-flex font-size-12 white">
                                     <p id="_servicos" class="light-green-text font-h5"></p>
                                     <p class="grey-text">(serviços)</p>
@@ -36,47 +39,53 @@
                     </div>
                     <div class="box-column-row">
                         <div class="box-card z-depth-0 border-a">
-                            <div class="card-header grey-text">Atendimentos<i class="material-icons left">timelapse</i></div>
-                            <div class="box-around">                            
-                                <div id="chart_cliente" class="card-chart"></div>                               
+                            <div class="card-header grey-text">Atendimentos<i class="material-icons left">timelapse</i>
+                            </div>
+                            <div class="box-around">
+                                <div id="chart_cliente" class="card-chart"></div>
                             </div>
                         </div>
                         <div class="box-card z-depth-0 border-a">
-                            <div class="card-header grey-text">Serviços<i class="material-icons left">construction</i></div>
-                            <div class="box-around">                            
-                                <div id="chart_services" class="card-chart"></div>                              
+                            <div class="card-header grey-text">Serviços<i class="material-icons left">construction</i>
+                            </div>
+                            <div class="box-around">
+                                <div id="chart_services" class="card-chart"></div>
                             </div>
                         </div>
                         <div class="box-card z-depth-0 border-a">
                             <div class="card-header grey-text">Canal<i class="material-icons left">chat_bubble</i></div>
-                            <div class="box-around">                            
-                                <div id="piechart_canal_p" class="card-chart"></div>                              
+                            <div class="box-around">
+                                <div id="piechart_canal_p" class="card-chart"></div>
                             </div>
                         </div>
                         <div class="box-card z-depth-0 border-a">
-                            <div class="card-header grey-text">Canal Serviços<i class="material-icons left">workspaces</i></div>
-                            <div class="box-around">                            
-                                <div id="chart_canal" class="card-chart"></div>                              
+                            <div class="card-header grey-text">Canal Serviços<i
+                                    class="material-icons left">workspaces</i></div>
+                            <div class="box-around">
+                                <div id="chart_canal" class="card-chart"></div>
                             </div>
                         </div>
                         <div class="box-card z-depth-0 border-a">
-                            <div class="card-header grey-text">Setores<i class="material-icons left">location_on</i></div>
-                            <div class="box-around">                            
-                                <div id="piechart_setores_p" class="card-chart"></div>                              
+                            <div class="card-header grey-text">Setores<i class="material-icons left">location_on</i>
+                            </div>
+                            <div class="box-around">
+                                <div id="piechart_setores_p" class="card-chart"></div>
                             </div>
                         </div>
                         <div class="box-card z-depth-0 border-a">
-                            <div class="card-header grey-text">Setores Serviços<i class="material-icons left">workspaces</i></div>
-                            <div class="box-around">                            
-                                <div id="chart_setores" class="card-chart"></div>                              
+                            <div class="card-header grey-text">Setores Serviços<i
+                                    class="material-icons left">workspaces</i></div>
+                            <div class="box-around">
+                                <div id="chart_setores" class="card-chart"></div>
                             </div>
                         </div>
                     </div>
                     <div class="box-column-row">
                         <div class="box-card z-depth-0 border-a">
-                            <div class="card-header grey-text">Variação Mensal<i class="material-icons left">calendar_month</i></div>
-                            <div class="box-around">                            
-                                <div id="chart_month" class="card-chart-m"></div>                              
+                            <div class="card-header grey-text">Variação Mensal<i
+                                    class="material-icons left">calendar_month</i></div>
+                            <div class="box-around">
+                                <div id="chart_month" class="card-chart-m"></div>
                             </div>
                         </div>
                     </div>
@@ -85,7 +94,7 @@
         </div>
     </div>
     <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="js/loader.js"></script>
     <script language="javascript">
         DoUserList();
         DoAtendimentos();
@@ -97,16 +106,18 @@
             CreateCharts();
         }, 60000);
 
-        function CreateCharts(){
-            google.charts.load('current', {packages: ['corechart', 'bar']});
-            google.charts.setOnLoadCallback(DoCharts);     
-        }   
+        function CreateCharts() {
+            google.charts.load('current', { packages: ['corechart', 'bar'] });
+            google.charts.setOnLoadCallback(DoCharts);
+        }
+
+        var _url = window.location.host;
 
         function DoUserList() {
-            $.getJSON(`https://localhost:7116/v1/bi-users_status`, (data) => {
+            $.getJSON(`http://${_url}/v1/bi-users_status`, (data) => {
                 $('#cardcontainer').empty();
                 $('#cardcontainer').append('<div class="card-header grey-text">Usuários<i class="material-icons left">account_circle</i></div>');
-                $.each(data, function (i, item) {                   
+                $.each(data, function (i, item) {
                     $('#cardcontainer').append(`<div id="container${i}" class="font-size-12 pdn-10 mgn-l-10 grey-text">`);
                     $(`#container${i}`).append(`<p class="truncate">${item.setor}</p>`);
                     $.each(item.lista, function (x, xitem) {
@@ -116,12 +127,12 @@
                     });
                     $('#cardcontainer').append('</div>');
                     $('#cardcontainer').append('<div class="divider"></div>');
-                });                             
+                });
             });
         };
 
         function DoAtendimentos() {
-            $.getJSON(`https://localhost:7116/v1/bi-atendimentos`, (data) => {
+            $.getJSON(`http://${_url}/v1/bi-atendimentos`, (data) => {
                 $('#_atendimentos').empty();
                 $('#_servicos').empty();
                 $('#_atendimentos').append(data.value1);
@@ -129,133 +140,134 @@
             });
         }
 
-        function DoCharts() { 
-            $.getJSON(`https://localhost:7116/v1/bi-at-clients`, (data) => {
-                var dataArray = [['Cliente','Aten.']];
+        function DoCharts() {
+            $.getJSON(`http://${_url}/v1/bi-at-clients`, (data) => {
+                var dataArray = [['Cliente', 'Aten.']];
                 $.each(data, function (i, item) {
-                    dataArray.push([item.label, item.value]); 
+                    dataArray.push([item.label, item.value]);
                 });
-                var data = google.visualization.arrayToDataTable(dataArray);  
-                var options = {       
-                    legend:'left',
+                var data = google.visualization.arrayToDataTable(dataArray);
+                var options = {
+                    legend: 'left',
                     animation: {
                         duration: 1000,
                         easing: 'out'
                     },
-                    pieHole:0.4                     
-                };  
-                var chart = new google.visualization.PieChart(document.getElementById('chart_cliente'));  
-                chart.draw(data, options);
-            });
-            $.getJSON(`https://localhost:7116/v1/bi-at-canal-t`, (data) => {
-                var dataArray = [['Canal','Aten.','Perc.']];
-                $.each(data, function (i, item) {
-                    dataArray.push([item.label, item.value, item.percent]); 
-                });
-                var mdata = google.visualization.arrayToDataTable(dataArray);  
-                var options = {
-                    legend:'left',
-                    animation: {
-                        duration: 1000,
-                        easing: 'out'
-                    },    
-                    pieHole:0.4 
-                };  
-                var chart = new google.visualization.PieChart(document.getElementById('piechart_canal_p'));  
-                chart.draw(mdata, options);
-            }); 
-            $.getJSON(`https://localhost:7116/v1/bi-at-canal`, (data) => {
-                var dataArray = [['Canal','Aten.','Serv.']];
-                $.each(data, function (i, item) {
-                    dataArray.push([item.label, item.value1, item.value2]); 
-                });
-                var data = google.visualization.arrayToDataTable(dataArray);  
-                var options = {
-                    chartArea: {  
-                        width: '80%'  
-                    },
-                    seriesType: 'bars', 
-                    colors: ['#2196f3','#20b2aa'],                   
-                    legend:'top'
+                    pieHole: 0.4
                 };
-                var chart = new google.visualization.ComboChart(document.getElementById('chart_canal'));  
+                var chart = new google.visualization.PieChart(document.getElementById('chart_cliente'));
                 chart.draw(data, options);
             });
-            $.getJSON(`https://localhost:7116/v1/bi-at-setores-t`, (data) => {
-                var dataArray = [['Setor','Aten.','Perc.']];
+            $.getJSON(`http://${_url}/v1/bi-at-canal-t`, (data) => {
+                var dataArray = [['Canal', 'Aten.', 'Perc.']];
                 $.each(data, function (i, item) {
-                    dataArray.push([item.label, item.value, item.percent]); 
+                    dataArray.push([item.label, item.value, item.percent]);
                 });
-                var mdata = google.visualization.arrayToDataTable(dataArray);  
+                var mdata = google.visualization.arrayToDataTable(dataArray);
                 var options = {
-                    legend:'left',
+                    legend: 'left',
                     animation: {
                         duration: 1000,
                         easing: 'out'
-                    },    
-                    pieHole:0.4 
-                };  
-                var chart = new google.visualization.PieChart(document.getElementById('piechart_setores_p'));  
+                    },
+                    pieHole: 0.4
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('piechart_canal_p'));
                 chart.draw(mdata, options);
-            });  
-            $.getJSON(`https://localhost:7116/v1/bi-at-setores`, (data) => {
-                var dataArray = [['Setor','Aten.','Serv.']];
+            });
+            $.getJSON(`http://${_url}/v1/bi-at-canal`, (data) => {
+                var dataArray = [['Canal', 'Aten.', 'Serv.']];
                 $.each(data, function (i, item) {
-                    dataArray.push([item.label, item.value1, item.value2]); 
+                    dataArray.push([item.label, item.value1, item.value2]);
                 });
-                var data = google.visualization.arrayToDataTable(dataArray);  
+                var data = google.visualization.arrayToDataTable(dataArray);
                 var options = {
-                    chartArea: {  
-                        width: '80%'  
+                    chartArea: {
+                        width: '80%'
                     },
                     seriesType: 'bars',
-                    colors: ['#2196f3','#20b2aa'],                    
-                    legend:'top'
+                    colors: ['#2196f3', '#20b2aa'],
+                    legend: 'top'
                 };
-                var chart = new google.visualization.ComboChart(document.getElementById('chart_setores'));  
+                var chart = new google.visualization.ComboChart(document.getElementById('chart_canal'));
                 chart.draw(data, options);
             });
-            $.getJSON(`https://localhost:7116/v1/bi-at-servicos`, (data) => {
-                var dataArray = [['Serviço','Valor']];
+            $.getJSON(`http://${_url}/v1/bi-at-setores-t`, (data) => {
+                var dataArray = [['Setor', 'Aten.', 'Perc.']];
                 $.each(data, function (i, item) {
-                    dataArray.push([item.label, item.value]); 
+                    dataArray.push([item.label, item.value, item.percent]);
                 });
-                var data = google.visualization.arrayToDataTable(dataArray);  
+                var mdata = google.visualization.arrayToDataTable(dataArray);
                 var options = {
-                    chartArea: {  
-                        width: '80%'  
+                    legend: 'left',
+                    animation: {
+                        duration: 1000,
+                        easing: 'out'
                     },
-                    seriesType: 'bars',  
+                    pieHole: 0.4
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('piechart_setores_p'));
+                chart.draw(mdata, options);
+            });
+            $.getJSON(`http://${_url}/v1/bi-at-setores`, (data) => {
+                var dataArray = [['Setor', 'Aten.', 'Serv.']];
+                $.each(data, function (i, item) {
+                    dataArray.push([item.label, item.value1, item.value2]);
+                });
+                var data = google.visualization.arrayToDataTable(dataArray);
+                var options = {
+                    chartArea: {
+                        width: '80%'
+                    },
+                    seriesType: 'bars',
+                    colors: ['#2196f3', '#20b2aa'],
+                    legend: 'top'
+                };
+                var chart = new google.visualization.ComboChart(document.getElementById('chart_setores'));
+                chart.draw(data, options);
+            });
+            $.getJSON(`http://${_url}/v1/bi-at-servicos`, (data) => {
+                var dataArray = [['Serviço', 'Valor']];
+                $.each(data, function (i, item) {
+                    dataArray.push([item.label, item.value]);
+                });
+                var data = google.visualization.arrayToDataTable(dataArray);
+                var options = {
+                    chartArea: {
+                        width: '80%'
+                    },
+                    seriesType: 'bars',
                     colors: ['#20b2aa']
                 };
-                var chart = new google.visualization.ComboChart(document.getElementById('chart_services'));  
+                var chart = new google.visualization.ComboChart(document.getElementById('chart_services'));
                 chart.draw(data, options);
             });
             /**/
-            $.getJSON(`https://localhost:7116/v1/bi-month-atendimentos`, (data) => {
-                var dataArray = [['Mês','Aten.','Serv.']];
+            $.getJSON(`http://${_url}/v1/bi-month-atendimentos`, (data) => {
+                var dataArray = [['Mês', 'Aten.', 'Serv.']];
                 $.each(data, function (i, item) {
-                    dataArray.push([item.label, item.value1, item.value2]); 
+                    dataArray.push([item.label, item.value1, item.value2]);
                 });
-                var data = google.visualization.arrayToDataTable(dataArray);  
-                var options = { 
-                    chartArea: {  
-                        width: '85%'  
+                var data = google.visualization.arrayToDataTable(dataArray);
+                var options = {
+                    chartArea: {
+                        width: '85%'
                     },
-                    hAxis: {  
+                    hAxis: {
                         minValue: 0
-                    },  
+                    },
                     animation: {
                         duration: 1000,
                         easing: 'out'
                     },
-                    colors: ['#2196f3','#20b2aa'],
+                    colors: ['#2196f3', '#20b2aa'],
                     legend: { position: 'bottom' }
-                };  
-                var chart = new google.visualization.AreaChart(document.getElementById('chart_month'));  
+                };
+                var chart = new google.visualization.AreaChart(document.getElementById('chart_month'));
                 chart.draw(data, options);
-            });     
+            });
         }
     </script>
 </body>
+
 </html>
