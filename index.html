@@ -96,6 +96,7 @@
     <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="js/loader.js"></script>
     <script language="javascript">
+        var _url = window.location.hostname + ":8092";
         DoUserList();
         DoAtendimentos();
         CreateCharts();
@@ -111,9 +112,8 @@
             google.charts.setOnLoadCallback(DoCharts);
         }
 
-        var _url = window.location.host;
-
         function DoUserList() {
+            alert(`http://${_url}/v1/bi-users_status`);
             $.getJSON(`http://${_url}/v1/bi-users_status`, (data) => {
                 $('#cardcontainer').empty();
                 $('#cardcontainer').append('<div class="card-header grey-text">Usuários<i class="material-icons left">account_circle</i></div>');
